@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: python-script-weekly
+spec:
+  schedule: "0 0 * * 0" # Every Sunday at midnight
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: python-script
+            image: <your-docker-repo>/my-python-script
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
